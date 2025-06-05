@@ -7,10 +7,9 @@ from pathlib import Path
 app = Flask(__name__)
 CORS(app)
 
-# Load your model and other resources
-MODEL_PATH = Path(__file__).parent.parent / 'backend' / 'model.joblib'
-ALERTS_PATH = Path(__file__).parent.parent / 'backend' / 'alerts.json'
-NEWS_PATH = Path(__file__).parent.parent / 'backend' / 'news.json'
+# Load data from local files
+ALERTS_PATH = Path(__file__).parent / 'alerts.json'
+NEWS_PATH = Path(__file__).parent / 'news.json'
 
 # Load your data
 with open(ALERTS_PATH, 'r') as f:
@@ -21,13 +20,11 @@ with open(NEWS_PATH, 'r') as f:
 
 @app.route('/api/alerts', methods=['GET'])
 def get_alerts():
-    return jsonify(alerts_data)
+    return jsonify(alerts_data.get('alerts', []))
 
 @app.route('/api/news', methods=['GET'])
 def get_news():
-    return jsonify(news_data)
-
-# Add other routes from your app.py as needed
+    return jsonify(news_data.get('news', []))
 
 # Vercel serverless function handler
 def handler(request):
