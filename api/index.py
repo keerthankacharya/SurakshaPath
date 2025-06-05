@@ -29,6 +29,7 @@ def get_news():
 
 # Add other routes from your app.py as needed
 
-def handler(event, context):
+# Vercel serverless function handler
+def handler(request):
     """Vercel serverless function handler"""
-    return app(event, context) 
+    return app(request) 
