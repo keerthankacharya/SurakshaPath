@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
+import { API_ENDPOINTS } from '../config'
 import './AlertsMenu.css'
 
 function AlertsMenu({ isOpen, onClose }) {
@@ -10,7 +11,7 @@ function AlertsMenu({ isOpen, onClose }) {
   useEffect(() => {
     const fetchAlerts = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/alerts')
+        const response = await axios.get(API_ENDPOINTS.alerts)
         console.log('Fetched alerts:', response.data)
         setAlerts(response.data)
         setLoading(false)

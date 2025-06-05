@@ -4,6 +4,7 @@ import 'leaflet/dist/leaflet.css'
 import 'leaflet-routing-machine/dist/leaflet-routing-machine.css'
 import { useEffect, useState, useRef } from 'react'
 import axios from 'axios'
+import { API_ENDPOINTS } from '../config'
 import icon from 'leaflet/dist/images/marker-icon.png'
 import iconShadow from 'leaflet/dist/images/marker-shadow.png'
 import iconRetina from 'leaflet/dist/images/marker-icon-2x.png'
@@ -650,7 +651,7 @@ function MapView({ fromCoord, toCoord }) {
   useEffect(() => {
     const fetchAlerts = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/alerts')
+        const response = await axios.get(API_ENDPOINTS.alerts)
         setAlerts(response.data)
       } catch (err) {
         setError('Failed to fetch alerts')
